@@ -34,7 +34,7 @@ r_s = 20
 valeurs_rho_0 = [5e6, 1e7, 2e7]
 
 plt.figure(figsize=(8, 5))
-#on itère sur les différentes valeurs de rho_0 pour tracer les profils correspondants
+# On itère sur les différentes valeurs de rho_0 pour tracer les profils correspondants
 for rho_0 in valeurs_rho_0:
     densite = profil_nfw(r, rho_0, r_s)
     plt.plot(r, densite, label=f"rho_0 = {rho_0: .0e}")
@@ -53,7 +53,7 @@ rho_0 = 1e7
 valeurs_r_s = [10, 20, 40]
 
 plt.figure(figsize=(8, 5))
-#on itère sur les différentes valeurs de r_s pour tracer les profils correspondants
+# On itère sur les différentes valeurs de r_s pour tracer les profils correspondants
 for r_s in valeurs_r_s:
     densite = profil_nfw(r, rho_0, r_s)
     plt.plot(r, densite, label=f"r_s = {r_s} kpc")
@@ -65,4 +65,50 @@ plt.yscale("log")
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.savefig("effet_r_s.png", dpi=150, bbox_inches="tight")
+plt.show()
+
+# Masse enclose calculée en séparant la densité en sphères concentriques
+def masse_nfw(r, rho_0, r_s):
+    x = r / r_s
+    return 4 * np.pi * rho_0 * r_s**3 * (np.log(1 + x) - x / (1 + x))
+
+# Constante gravitationnelle en unités astro : kpc, km/s, masses solaires
+G = 4.30091e-6  # kpc . (km/s)^2 / Msun
+
+def vitesse_circulaire(r, rho_0, r_s):
+    M = masse_nfw(r, rho_0, r_s)
+    return np.sqrt(G * M / r)
+
+# Paramètres du halo (mêmes valeurs de base que précédemment)
+rho_0 = 1e7
+r_s = 20
+r = np.linspace(0.1, 100, 500)
+
+# Masse enclose
+masse = masse_nfw(r, rho_0, r_s)
+
+plt.figure(figsize=(8, 5))
+plt.plot(r, masse, color="darkgreen", lw=2)
+plt.axvline(r_s, color="gray", ls="--", lw=1, label=f"r_s = {r_s} kpc")
+plt.xlabel("Rayon r (kpc)")
+plt.ylabel("Masse enclose M(r) (M_sun)")
+plt.title("Masse enclose du halo NFW")
+plt.yscale("log")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig("masse_enclose_nfw.png", dpi=150, bbox_inches="tight")
+plt.show()
+
+# Courbe de rotation
+vitesse = vitesse_circulaire(r, rho_0, r_s)
+
+plt.figure(figsize=(8, 5))
+plt.plot(r, vitesse, color="crimson", lw=2)
+plt.axvline(r_s, color="gray", ls="--", lw=1, label=f"r_s = {r_s} kpc")
+plt.xlabel("Rayon r (kpc)")
+plt.ylabel("Vitesse circulaire v_c(r) (km/s)")
+plt.title("Courbe de rotation du halo NFW")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig("courbe_rotation_nfw.png", dpi=150, bbox_inches="tight")
 plt.show()
