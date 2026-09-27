@@ -1,0 +1,1 @@
+![[03-Ressources/Attachments/masse_enclose_nfw.png]]
