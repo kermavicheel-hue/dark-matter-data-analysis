@@ -1,1 +1,0 @@
-![[03-Ressources/Attachments/courbe_rotation_nfw.png]]

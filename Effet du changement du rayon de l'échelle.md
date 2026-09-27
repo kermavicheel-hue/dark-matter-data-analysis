@@ -1,1 +1,0 @@
-![[effet_r_s 1.png]]

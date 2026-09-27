@@ -1,1 +1,0 @@
-![[03-Ressources/Attachments/vobs_ngc3198.png]]

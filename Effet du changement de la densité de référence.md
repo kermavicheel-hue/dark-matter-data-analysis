@@ -1,1 +1,0 @@
-![[03-Ressources/Attachments/effet_rho_0.png]]

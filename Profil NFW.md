@@ -1,1 +1,0 @@
-![[03-Ressources/Attachments/profil_nfw.png]]

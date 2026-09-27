@@ -1,1 +1,0 @@
-![[03-Ressources/Attachments/fit_ngc3198.png]]
