@@ -112,3 +112,48 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.savefig("courbe_rotation_nfw.png", dpi=150, bbox_inches="tight")
 plt.show()
+
+import pandas as pd
+from scipy.optimize import curve_fit
+
+data = pd.read_csv("NGC3198_rotmod.dat", sep="\t", comment="#",
+                    names=["Rad", "Vobs", "errV", "Vgas", "Vdisk", "Vbul", "SBdisk", "SBbul"])
+
+# On extrait les colonnes nécessaires pour l'ajustement
+rad = data["Rad"].values
+vobs = data["Vobs"].values
+errv = data["errV"].values
+
+# Courbe de rotation observée
+plt.figure(figsize=(8, 5))
+plt.errorbar(rad, vobs, yerr=errv, fmt="o", color="black", label="Vobs (SPARC)")
+plt.xlabel("Rayon r (kpc)")
+plt.ylabel("Vitesse observée (km/s)")
+plt.title("Courbe de rotation mesurée - NGC 3198")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig("vobs_ngc3198.png", dpi=150, bbox_inches="tight")
+plt.show()
+
+# Ajustement
+popt, pcov = curve_fit(vitesse_circulaire, rad, vobs, p0=[1e7, 20],
+                        sigma=errv, absolute_sigma=True)
+rho_0_fit, r_s_fit = popt
+erreurs = np.sqrt(np.diag(pcov))
+print(f"rho_0 = {rho_0_fit:.2e} +/- {erreurs[0]:.2e}")
+print(f"r_s   = {r_s_fit:.1f} +/- {erreurs[1]:.1f} kpc")
+
+# Comparaison visuelle
+r_lisse = np.linspace(rad.min(), rad.max(), 300)
+v_modele = vitesse_circulaire(r_lisse, rho_0_fit, r_s_fit)
+
+plt.figure(figsize=(8, 5))
+plt.errorbar(rad, vobs, yerr=errv, fmt="o", color="black", label="Vobs (SPARC)")
+plt.plot(r_lisse, v_modele, color="crimson", lw=2, label="Modèle NFW ajusté")
+plt.xlabel("Rayon r (kpc)")
+plt.ylabel("Vitesse (km/s)")
+plt.title("Ajustement du halo NFW - NGC 3198")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig("fit_ngc3198.png", dpi=150, bbox_inches="tight")
+plt.show()
