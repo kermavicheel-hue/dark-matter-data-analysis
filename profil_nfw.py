@@ -116,7 +116,7 @@ plt.show()
 import pandas as pd
 from scipy.optimize import curve_fit
 
-data = pd.read_csv("NGC3198_rotmod.dat", sep="\t", comment="#",
+data = pd.read_csv("NGC2403_rotmod.dat", sep="\t", comment="#",
                     names=["Rad", "Vobs", "errV", "Vgas", "Vdisk", "Vbul", "SBdisk", "SBbul"])
 
 # On extrait les colonnes nécessaires pour l'ajustement
@@ -129,10 +129,10 @@ plt.figure(figsize=(8, 5))
 plt.errorbar(rad, vobs, yerr=errv, fmt="o", color="black", label="Vobs (SPARC)")
 plt.xlabel("Rayon r (kpc)")
 plt.ylabel("Vitesse observée (km/s)")
-plt.title("Courbe de rotation mesurée - NGC 3198")
+plt.title("Courbe de rotation mesurée - NGC 2403")
 plt.legend()
 plt.grid(True, alpha=0.3)
-plt.savefig("vobs_ngc3198.png", dpi=150, bbox_inches="tight")
+plt.savefig("vobs_ngc2403.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 # Ajustement
@@ -152,8 +152,8 @@ plt.errorbar(rad, vobs, yerr=errv, fmt="o", color="black", label="Vobs (SPARC)")
 plt.plot(r_lisse, v_modele, color="crimson", lw=2, label="Modèle NFW ajusté")
 plt.xlabel("Rayon r (kpc)")
 plt.ylabel("Vitesse (km/s)")
-plt.title("Ajustement du halo NFW - NGC 3198")
+plt.title("Ajustement du halo NFW - NGC 2403")
 plt.legend()
 plt.grid(True, alpha=0.3)
-plt.savefig("fit_ngc3198.png", dpi=150, bbox_inches="tight")
+plt.savefig("fit_ngc2403.png", dpi=150, bbox_inches="tight")
 plt.show()
