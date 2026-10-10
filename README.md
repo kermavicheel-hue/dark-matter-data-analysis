@@ -4,7 +4,7 @@ Modélisation d'un halo de matière noire (profil NFW) et confrontation à de vr
 
 ## Contexte
 
-Dans une galaxie, si toute la masse était concentrée dans les étoiles visibles, les régions éloignées du centre devraient tourner nettement plus lentement que les régions centrales — comme Neptune tourne plus lentement que Mercure autour du Soleil. Ce n'est pas ce qu'on observe : la vitesse de rotation reste quasiment constante loin du centre. Cet écart entre prédiction et réalité est l'une des preuves historiques de la matière noire (Vera Rubin, années 1970).
+Dans une galaxie, si toute la masse était concentrée dans les étoiles visibles, les régions éloignées du centre devraient tourner nettement plus lentement que les régions centrales, comme Neptune tourne plus lentement que Mercure autour du Soleil. Ce n'est pas ce qu'on observe : la vitesse de rotation reste quasiment constante loin du centre. Cet écart entre prédiction et réalité est l'une des preuves historiques de la matière noire (Vera Rubin, années 1970).
 
 Ce projet modélise un halo de matière noire, en dérive une courbe de rotation théorique, et l'ajuste à des mesures réelles.
 
